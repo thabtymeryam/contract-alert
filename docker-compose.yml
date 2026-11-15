@@ -1,0 +1,58 @@
+# All configuration comes from the .env file next to this file.
+# Copy .env.example to .env and fill in the values before running `docker compose up`.
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  backend:
+    build: ./backend
+    ports:
+      - "${BACKEND_PORT:-8000}:8000"
+    volumes:
+      - ./backend:/app
+    env_file:
+      - .env
+    environment:
+      PYTHONPATH: /app
+    # Lets the container reach an Ollama server running on the host (needed on Linux; built in on Mac/Windows)
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      - db
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "${FRONTEND_PORT:-3000}:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      # The browser only talks to Next.js; its /api/* proxy forwards to FastAPI over the compose network
+      BACKEND_API_URL: http://backend:8000/api
+    depends_on:
+      - backend
+
+  # Optional: run Ollama inside Docker with `docker compose --profile ollama up`
+  # and set OLLAMA_BASE_URL=http://ollama:11434 in .env.
+  # On a Mac, prefer running Ollama natively (Docker can't use the Apple GPU, so it's much slower).
+  #ollama:
+  #  image: ollama/ollama:latest
+  #  profiles: ["ollama"]
+  #  ports:
+  #    - "11434:11434"
+  #  volumes:
+  #    - ollama:/root/.ollama
+
+volumes:
+  pgdata:
+#  ollama:

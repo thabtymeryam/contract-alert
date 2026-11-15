@@ -1,0 +1,10 @@
+from app.models.contract import Contract  # noqa: F401
+from app.models.user import User  # noqa: F401
+from app.models.contract_party import ContractParty  # noqa: F401
+from app.models.clause import Clause  # noqa: F401
+from app.models.contract_event import ContractEvent  # noqa: F401
+from app.models.obligation import Obligation  # noqa: F401
+from app.models.payment_term import PaymentTerm  # noqa: F401
+from app.models.penalty import Penalty  # noqa: F401
+from app.models.alert_log import AlertLog  # noqa: F401
+from app.models.notification import Notification  # noqa: F401

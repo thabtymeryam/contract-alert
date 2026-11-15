@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.pyc
+.env
+backend/.env
+
+# Node
+node_modules/
+.next/
+frontend/.env.local
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+
+# Uploads
+backend/uploads/*
+!backend/uploads/.gitkeep
+backend/uploaded_files/
+
+*.tsbuildinfo
+
+# Local email preview (scripts/email_test.py)
+backend/email-preview.html

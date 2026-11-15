@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Theme tokens are HSL channels so Tailwind opacity modifiers work (bg-primary/10). */
+@layer base {
+  :root {
+    --background: 210 20% 98%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    --primary: 221 83% 53%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 214 32% 95%;
+    --secondary-foreground: 222 47% 11%;
+    --muted: 214 32% 95%;
+    --muted-foreground: 215 16% 42%;
+    --accent: 214 60% 95%;
+    --accent-foreground: 222 47% 11%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 214 24% 89%;
+    --input: 214 24% 85%;
+    --ring: 221 83% 53%;
+    --radius: 0.5rem;
+
+    --sidebar: 0 0% 100%;
+    --sidebar-foreground: 215 25% 27%;
+    --sidebar-accent: 214 60% 95%;
+    --sidebar-accent-foreground: 224 76% 40%;
+    --sidebar-border: 214 24% 89%;
+
+    --critical: 0 72% 45%;
+    --critical-soft: 0 86% 96%;
+    --warning: 32 95% 36%;
+    --warning-soft: 43 96% 93%;
+    --upcoming: 221 83% 45%;
+    --upcoming-soft: 214 95% 95%;
+    --success: 142 72% 29%;
+    --success-soft: 141 76% 94%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+}
